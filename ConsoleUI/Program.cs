@@ -8,14 +8,20 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            DoublyLinkedList_Client();
             QuickFindUF_Client();
         }
 
         static void QuickFindUF_Client()
         {
-            var qf = new QuickFindUF();
-            qf.TestBuild();
+            var qf = new QuickFindUF(9);
+            Console.WriteLine($"New array: {qf.ToString()}");
+            qf.Union(1, 2);
+            Console.WriteLine($"Union(1, 2): {qf.ToString()}");
+            qf.Union(1, 8);
+            Console.WriteLine($"Union(1, 8): {qf.ToString()}");
+            qf.Union(0, 7);
+            Console.WriteLine($"Union(0, 7): {qf.ToString()}");
+            Console.WriteLine($"Connected(2, 8): Expected: True, Actually: {qf.Connected(2, 8)}");
         }
 
         static void DoublyLinkedList_Client()
