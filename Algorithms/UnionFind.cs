@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace Algorithms
 {
   /// <summary>
@@ -63,6 +65,69 @@ namespace Algorithms
         result += id[i].ToString();
 
       return result;
+    }
+  }
+
+  /// <summary>
+  /// In QuickUnionUF <c>int[] id</c> array representing a SET OF TREES that's
+  /// called a FOREST. Each entry in an array contains the reference to its
+  /// parent. ROOT: id[x] == x.
+  /// </summary>
+  public class QuickUnionUF
+  {
+    // stores the parent pointers.
+    private readonly int[] id;
+
+    public QuickUnionUF(int size)
+    {
+      id = new int[size];
+
+      for (int i = 0; i < size; i++)
+        id[i] = i;
+    }
+
+    /// <summary>
+    /// Chases for a parent of the P'th entry.
+    /// </summary>
+    /// <param name="p"></param>
+    /// <returns></returns>
+    public int FindRoot(int p)
+    {
+      while (p != id[p])
+      {
+        p = id[p];
+      }
+      return p;
+    }
+
+    /// <summary>
+    /// Chase the ROOTs of P and Q. Check if they have the same ROOT.
+    /// </summary>
+    /// <param name="p"></param>
+    /// <param name="q"></param>
+    /// <returns></returns>
+    public bool Connected(int p, int q)
+    {
+      return FindRoot(p) == FindRoot(q);
+    }
+
+    /// <summary>
+    /// Connect P componets's ROTT to Q's component ROOT.
+    /// Find ROOTs of both, update P's pointer for new ROOT.
+    /// </summary>
+    /// <param name="p"></param>
+    /// <param name="q"></param>
+    public void Union(int p, int q)
+    {
+      int rootP = FindRoot(p);
+      int rootQ = FindRoot(q);
+
+      id[rootP] = rootQ;
+    }
+
+    public override string ToString()
+    {
+      return string.Join("", id);
     }
   }
 }

@@ -9,19 +9,33 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             QuickFindUF_Client();
+            QuickUnionUF_Client();
+        }
+
+        static void QuickUnionUF_Client()
+        {
+            var uf = new QuickUnionUF(10);
+            Console.WriteLine($"New array: {uf.ToString()}");
+            uf.Union(1, 2);
+            Console.WriteLine($"Union(1, 2): {uf.ToString()}");
+            uf.Union(1, 8);
+            Console.WriteLine($"Union(1, 8): {uf.ToString()}");
+            uf.Union(0, 7);
+            Console.WriteLine($"Union(0, 7): {uf.ToString()}");
+            Console.WriteLine($"Connected(2, 8): Expected: True, Actually: {uf.Connected(2, 8)}");
         }
 
         static void QuickFindUF_Client()
         {
-            var qf = new QuickFindUF(9);
-            Console.WriteLine($"New array: {qf.ToString()}");
-            qf.Union(1, 2);
-            Console.WriteLine($"Union(1, 2): {qf.ToString()}");
-            qf.Union(1, 8);
-            Console.WriteLine($"Union(1, 8): {qf.ToString()}");
-            qf.Union(0, 7);
-            Console.WriteLine($"Union(0, 7): {qf.ToString()}");
-            Console.WriteLine($"Connected(2, 8): Expected: True, Actually: {qf.Connected(2, 8)}");
+            var uf = new QuickFindUF(10);
+            Console.WriteLine($"New array: {uf.ToString()}");
+            uf.Union(1, 2);
+            Console.WriteLine($"Union(1, 2): {uf.ToString()}");
+            uf.Union(1, 8);
+            Console.WriteLine($"Union(1, 8): {uf.ToString()}");
+            uf.Union(0, 7);
+            Console.WriteLine($"Union(0, 7): {uf.ToString()}");
+            Console.WriteLine($"Connected(2, 8): Expected: True, Actually: {uf.Connected(2, 8)}");
         }
 
         static void DoublyLinkedList_Client()
