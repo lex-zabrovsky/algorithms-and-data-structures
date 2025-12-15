@@ -118,7 +118,62 @@ namespace Algorithms
       int rootP = FindRoot(p);
       int rootQ = FindRoot(q);
 
-      id[rootP] = rootQ;
+      if (rootP != rootQ) id[rootP] = rootQ;
+    }
+
+    public override string ToString()
+    {
+      return string.Join("", id);
+    }
+  }
+
+  public class QuickUnionUF_Weighted
+  {
+    private readonly int[] id;
+    private readonly int[] sz;
+
+    public QuickUnionUF_Weighted(int size)
+    {
+      id = new int[size];
+      sz = new int[size];
+
+      for (int i = 0; i < size; i++)
+      {
+        id[i] = i;
+        sz[i] = 1;
+      }
+    }
+
+    public int FindRoot(int p)
+    {
+      while (p != id[p])
+      {
+        p = id[p];
+      }
+      return p;
+    }
+
+    public bool Connected(int p, int q)
+    {
+      return FindRoot(p) == FindRoot(q);
+    }
+
+    public void Union(int p, int q)
+    {
+      int rootP = FindRoot(p);
+      int rootQ = FindRoot(q);
+      if (rootP == rootQ) return;
+
+      if (sz[rootP] < sz[rootQ])
+      {
+        id[rootP] = rootQ;
+        sz[rootQ] += sz[rootP];
+      }
+      else
+      {
+        id[rootQ] = rootP;
+        sz[rootP] += sz[rootQ];
+      }
     }
 
     public override string ToString()
