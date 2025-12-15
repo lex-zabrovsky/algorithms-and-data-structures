@@ -146,11 +146,22 @@ namespace Algorithms
 
     public int FindRoot(int p)
     {
-      while (p != id[p])
+      // first descent: find root
+      int root = p;
+      while (root != id[root])
       {
-        p = id[p];
+        root = id[root];
       }
-      return p;
+      
+      // second descent: flatten the tree
+      while (p != root)
+      {
+        int pParent = id[p];
+        id[p] = root;
+        p = pParent;
+      }
+
+      return root;
     }
 
     public bool Connected(int p, int q)
